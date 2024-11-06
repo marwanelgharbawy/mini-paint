@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
         canvas.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         add(canvas, BorderLayout.CENTER);
 
-        setSize(800,600);
+        setSize(1000,600);
         setVisible(true);
     }
 
