@@ -10,13 +10,14 @@ public class PaintingPanel extends JPanel {
     private Graphics canvas;
 
     public PaintingPanel() {
-
+        graphicsEngine = new GraphicsEngine();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        graphicsEngine.refresh(canvas);
+        if (graphicsEngine != null) {
+            graphicsEngine.refresh(canvas);
+        }
     }
-
 }
