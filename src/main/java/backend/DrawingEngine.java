@@ -1,3 +1,7 @@
+package backend;
+
+import shapes.Shape;
+
 import java.awt.Graphics;
 
 public interface DrawingEngine {
