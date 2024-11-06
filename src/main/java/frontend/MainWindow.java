@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
+    private JPanel contentPane;
+    private PaintingPanel canvas;
     private JButton circleButton;
     private JButton lineSegmentButton;
     private JButton squareButton;
@@ -11,22 +13,66 @@ public class MainWindow extends JFrame {
     private JComboBox shapeDropDown;
     private JButton colorizeButton;
     private JButton deleteButton;
-    private JPanel contentPane;
 
     public MainWindow() {
+        // Deleted the .form file because I want to add a modified JPanel called PaintingPanel
+
         // Initialization
         setTitle("Vector Drawing Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        //
-        setContentPane(contentPane);
-        setVisible(true);
-        PaintingPanel canvas = new PaintingPanel();
-        contentPane.add(canvas);
-        canvas.setVisible(true);
+        // Initialize panels
+        initializeTopPanel();
+        initializeLeftPanel();
+
+        // Add canvas
+        canvas = new PaintingPanel();
+        canvas.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        add(canvas, BorderLayout.CENTER);
+
         setSize(800,600);
         setVisible(true);
+    }
+
+    private void initializeTopPanel() {
+        JPanel topPanel = new JPanel(new GridLayout(1, 5, 10, 10));
+
+        topPanel.add(new JLabel("")); // Leaving first column empty
+
+        topPanel.add(circleButton = new JButton("Circle"));
+        topPanel.add(lineSegmentButton = new JButton("LineSegment"));
+        topPanel.add(squareButton = new JButton("Square"));
+        topPanel.add(rectangleButton = new JButton("Rectangle"));
+
+        add(topPanel, BorderLayout.NORTH);
+    }
+
+    private void initializeLeftPanel() {
+        // JPanel leftPanel = new JPanel(new GridLayout(4, 2, 30, 5));
+        JPanel leftPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Padding values
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+
+
+        leftPanel.add(new JLabel("Select Shape"), gbc);
+        
+        // Empty combo box, will add its components later
+        shapeDropDown = new JComboBox<>();
+        shapeDropDown.setPreferredSize(new Dimension(150, 25));
+        gbc.gridy++;
+        leftPanel.add(shapeDropDown, gbc);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        buttonPanel.add(colorizeButton = new JButton("Colorize"));
+        buttonPanel.add(deleteButton = new JButton("Delete"));
+        gbc.gridy++;
+        leftPanel.add(buttonPanel, gbc);
+
+        add(leftPanel, BorderLayout.WEST);
     }
 
     public static void main(String[] args) {
