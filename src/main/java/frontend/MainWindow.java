@@ -93,6 +93,28 @@ public class MainWindow extends JFrame {
             }
         });
 
+        squareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Square button clicked");
+                new AddSquare(canvas);
+            }
+        });
+
+        circleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Circle button clicked");
+            }
+        });
+
+        lineSegmentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Line Segment button clicked");
+            }
+        });
+
         colorizeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
