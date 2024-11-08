@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;
@@ -88,10 +89,21 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Rectangle button clicked");
-                shapes.Rectangle rectangle = new Rectangle();
-                rectangle.setPosition(new Point(50, 50));
-                rectangle.setColor(Color.RED);
-                canvas.addShape(rectangle);
+                new AddRectangle(canvas);
+            }
+        });
+
+        colorizeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Colorize button clicked");
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Delete button clicked");
             }
         });
     }
