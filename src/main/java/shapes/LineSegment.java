@@ -7,7 +7,7 @@ public class LineSegment implements Shape {
     private Point startPoint;
     private Point endPoint;
     private Color color;
-    protected int id;
+    private int id;
     private static int lineCounter = 0;
 
     public LineSegment() {
