@@ -22,6 +22,7 @@ public class AddRectangle extends JFrame {
         setTitle("Add Rectangle");
         setSize(320, 240);
         setVisible(true);
+
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
