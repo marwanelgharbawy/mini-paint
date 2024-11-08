@@ -26,4 +26,8 @@ public class PaintingPanel extends JPanel {
             graphicsEngine.refresh(g);
         }
     }
+
+    public GraphicsEngine getGraphicsEngine() {
+        return graphicsEngine;
+    }
 }

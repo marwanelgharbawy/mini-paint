@@ -9,6 +9,8 @@ public class Rectangle implements Shape {
     private Color fillColor;
     private double height;
     private double width;
+    private int id;
+    private static int rectangleCounter = 0;
 
     public Rectangle() {
         this.position = new Point(0, 0);
@@ -16,6 +18,7 @@ public class Rectangle implements Shape {
         this.width = 0;
         this.color = Color.BLACK;
         this.fillColor = Color.WHITE;
+        this.id = rectangleCounter++;
     }
 
     @Override
@@ -68,5 +71,10 @@ public class Rectangle implements Shape {
         g.setColor(this.color != null ? this.color : Color.BLACK);
 //        g.fillRect(position.x, position.y, 100, 50); // Example rectangle
         g.drawRect(position.x, position.y, (int) width, (int) height);
+    }
+
+    @Override
+    public String toString() {
+        return "rectangle" + id;
     }
 }

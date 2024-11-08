@@ -1,5 +1,7 @@
 package frontend;
 
+import shapes.Shape;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -50,7 +52,6 @@ public class MainWindow extends JFrame {
     }
 
     private void initializeLeftPanel() {
-        // JPanel leftPanel = new JPanel(new GridLayout(4, 2, 30, 5));
         JPanel leftPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // Padding values
@@ -82,12 +83,19 @@ public class MainWindow extends JFrame {
         add(canvas, BorderLayout.CENTER);
     }
 
+    protected void updateShapeDropDown() {
+        shapeDropDown.removeAllItems();
+        for (Shape shape : canvas.getGraphicsEngine().getShapes()) {
+            shapeDropDown.addItem(shape); // Override toString() method
+        }
+    }
+
     private void addEventListeners() {
         rectangleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Rectangle button clicked");
-                new AddRectangle(canvas);
+                new AddRectangle(canvas, MainWindow.this);
             }
         });
 
@@ -119,6 +127,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Colorize button clicked");
+
             }
         });
 

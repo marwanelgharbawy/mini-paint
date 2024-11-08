@@ -17,7 +17,7 @@ public class AddRectangle extends JFrame {
     private JButton backButton;
     private JButton addButton;
 
-    public AddRectangle(PaintingPanel paintingPanel) {
+    public AddRectangle(PaintingPanel paintingPanel, MainWindow mainWindow) {
         setContentPane(contentPane);
         setTitle("Add Rectangle");
         setSize(320, 240);
@@ -34,6 +34,8 @@ public class AddRectangle extends JFrame {
                 rectangle.setPosition(new Point((int) x, (int) y));
                 rectangle.setProperties(Map.of("width", width, "height", height));
                 paintingPanel.addShape(rectangle);
+
+                mainWindow.updateShapeDropDown();
                 dispose();
             }
         });
