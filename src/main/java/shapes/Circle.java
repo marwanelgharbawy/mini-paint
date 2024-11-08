@@ -8,12 +8,15 @@ public class Circle implements Shape {
     private Color color;
     private Color fillColor;
     private double radius;
+    private int id;
+    private static int circleCounter = 0;
 
     public Circle() {
         this.position = new Point(0, 0);
         this.radius = 0;
-        this.color = Color.BLACK;
-        this.fillColor = Color.WHITE;
+        this.color = null;
+        this.fillColor = null;
+        this.id = circleCounter++;
     }
 
     @Override
@@ -60,5 +63,14 @@ public class Circle implements Shape {
     public void draw(Graphics canvas) {
         canvas.setColor(this.color != null ? this.color : Color.BLACK);
         canvas.drawOval(position.x, position.y, (int) radius * 2, (int) radius * 2);
+        if (this.fillColor != null) {
+            canvas.setColor(this.fillColor);
+            canvas.fillOval(position.x, position.y, (int) radius * 2, (int) radius * 2);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Circle" + id;
     }
 }

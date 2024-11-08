@@ -111,7 +111,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Circle button clicked");
-//                new AddCircle(canvas, MainWindow.this);
+                new AddCircle(canvas, MainWindow.this);
             }
         });
 

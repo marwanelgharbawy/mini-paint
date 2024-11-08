@@ -16,7 +16,7 @@ public class AddCircle extends JFrame {
     private JButton backButton;
     private JButton addButton;
 
-    public AddCircle(PaintingPanel paintingPanel) {
+    public AddCircle(PaintingPanel paintingPanel, MainWindow mainWindow) {
         setContentPane(panel1);
         setTitle("Add Circle");
         setSize(320, 240);
@@ -32,6 +32,8 @@ public class AddCircle extends JFrame {
                 circle.setPosition(new Point((int) x, (int) y));
                 circle.setProperties(Map.of("radius", radius));
                 paintingPanel.addShape(circle);
+
+                mainWindow.updateShapeDropDown();
                 dispose();
             }
         });
