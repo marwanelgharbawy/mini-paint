@@ -127,10 +127,18 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Colorize button clicked");
+
+                if (shapeDropDown.getItemCount() == 0) { // No shapes to colorize
+                    // Show a dialog box
+                    JOptionPane.showMessageDialog(null, "No shapes to colorize", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Color color = JColorChooser.showDialog(null, "Choose a color", Color.BLACK);
+
                 Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
-                    selectedShape.setColor(Color.BLUE); // Example color
-                    selectedShape.setFillColor(Color.BLUE); // Example color
+                    selectedShape.setFillColor(color);
                     canvas.repaint();
                 }
             }
