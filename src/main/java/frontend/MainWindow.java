@@ -1,7 +1,11 @@
 package frontend;
 
+import shapes.Rectangle;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;
@@ -25,14 +29,12 @@ public class MainWindow extends JFrame {
         // Initialize panels
         initializeTopPanel();
         initializeLeftPanel();
-
-        // Add canvas
-        canvas = new PaintingPanel();
-        canvas.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-        add(canvas, BorderLayout.CENTER);
+        initializeCanvas();
 
         setSize(1000,600);
         setVisible(true);
+
+        addEventListeners();
     }
 
     private void initializeTopPanel() {
@@ -73,6 +75,25 @@ public class MainWindow extends JFrame {
         leftPanel.add(buttonPanel, gbc);
 
         add(leftPanel, BorderLayout.WEST);
+    }
+
+    private void initializeCanvas() {
+        canvas = new PaintingPanel();
+        canvas.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        add(canvas, BorderLayout.CENTER);
+    }
+
+    private void addEventListeners() {
+        rectangleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Rectangle button clicked");
+                shapes.Rectangle rectangle = new Rectangle();
+                rectangle.setPosition(new Point(50, 50));
+                rectangle.setColor(Color.RED);
+                canvas.addShape(rectangle);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -51,10 +51,13 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void draw(Graphics canvas) {
-        int[] xPoints = {position.x, position.x, position.x + width / 2, position.x + width / 2};
-        int[] yPoints = {position.y, position.y, position.y + width / 2, position.y + width / 2};
-        canvas.setColor(this.color != null ? this.color : Color.BLACK);
-        canvas.drawPolygon(xPoints, yPoints, 4);
+    public void draw(Graphics g) {
+//        int[] xPoints = {position.x, position.x, position.x + width / 2, position.x + width / 2};
+//        int[] yPoints = {position.y, position.y, position.y + width / 2, position.y + width / 2};
+//        g.setColor(this.color != null ? this.color : Color.BLACK);
+//        g.drawPolygon(xPoints, yPoints, 4);
+        g.setColor(this.color != null ? this.color : Color.BLACK);
+        g.fillRect(position.x, position.y, 100, 50); // Example rectangle
+//        g.fillRect(position.x, position.y, width, height);
     }
 }

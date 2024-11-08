@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GraphicsEngine implements DrawingEngine {
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
+    public GraphicsEngine() {
+        shapes = new ArrayList<Shape>();
+    }
+
     @Override
     public void addShape(Shape shape) {
         shapes.add(shape);
