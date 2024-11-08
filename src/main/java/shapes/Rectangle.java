@@ -16,8 +16,8 @@ public class Rectangle implements Shape {
         this.position = new Point(0, 0);
         this.height = 0;
         this.width = 0;
-        this.color = Color.BLACK;
-        this.fillColor = Color.WHITE;
+        this.color = null;
+        this.fillColor = null;
         this.id = rectangleCounter++;
     }
 
@@ -64,13 +64,13 @@ public class Rectangle implements Shape {
 
     @Override
     public void draw(Graphics g) {
-//        int[] xPoints = {position.x, position.x, position.x + width / 2, position.x + width / 2};
-//        int[] yPoints = {position.y, position.y, position.y + width / 2, position.y + width / 2};
-//        g.setColor(this.color != null ? this.color : Color.BLACK);
-//        g.drawPolygon(xPoints, yPoints, 4);
-        g.setColor(this.color != null ? this.color : Color.BLACK);
-//        g.fillRect(position.x, position.y, 100, 50); // Example rectangle
-        g.drawRect(position.x, position.y, (int) width, (int) height);
+        // We have 2 colors, color and fill color
+        g.setColor(this.color != null ? this.color : Color.BLACK); // If color is null, use black as outline
+        g.drawRect(position.x, position.y, (int) width, (int) height); // Draw rectangle
+        if (this.fillColor != null) {
+            g.setColor(this.fillColor);
+            g.fillRect(position.x, position.y, (int) width, (int) height); // Fill rectangle
+        }
     }
 
     @Override

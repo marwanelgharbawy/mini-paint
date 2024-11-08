@@ -127,7 +127,12 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Colorize button clicked");
-
+                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                if (selectedShape != null) {
+                    selectedShape.setColor(Color.BLUE); // Example color
+                    selectedShape.setFillColor(Color.BLUE); // Example color
+                    canvas.repaint();
+                }
             }
         });
 
