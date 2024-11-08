@@ -63,13 +63,13 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics canvas) {
         // We have 2 colors, color and fill color
-        g.setColor(this.color != null ? this.color : Color.BLACK); // If color is null, use black as outline
-        g.drawRect(position.x, position.y, (int) width, (int) height); // Draw rectangle
+        canvas.setColor(this.color != null ? this.color : Color.BLACK); // If color is null, use black as outline
+        canvas.drawRect(position.x, position.y, (int) width, (int) height); // Draw rectangle
         if (this.fillColor != null) {
-            g.setColor(this.fillColor);
-            g.fillRect(position.x, position.y, (int) width, (int) height); // Fill rectangle
+            canvas.setColor(this.fillColor);
+            canvas.fillRect(position.x, position.y, (int) width, (int) height); // Fill rectangle
         }
     }
 
