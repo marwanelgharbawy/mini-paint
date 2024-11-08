@@ -7,11 +7,14 @@ public class LineSegment implements Shape {
     private Point startPoint;
     private Point endPoint;
     private Color color;
+    protected int id;
+    private static int lineCounter = 0;
 
     public LineSegment() {
         this.startPoint = new Point(0, 0);
         this.endPoint = new Point(0, 0);
-        this.color = Color.BLACK;
+        this.color = null;
+        this.id = lineCounter++;
     }
 
     @Override
@@ -65,5 +68,10 @@ public class LineSegment implements Shape {
     public void draw(Graphics canvas) {
         canvas.setColor(this.color != null ? this.color : Color.BLACK);
         canvas.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+    }
+
+    @Override
+    public String toString() {
+        return "line" + id;
     }
 }
