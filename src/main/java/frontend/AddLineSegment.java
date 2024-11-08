@@ -17,7 +17,7 @@ public class AddLineSegment extends JFrame{
     private JButton backButton;
     private JButton addButton;
 
-    public AddLineSegment(PaintingPanel paintingPanel) {
+    public AddLineSegment(PaintingPanel paintingPanel, MainWindow mainWindow) {
         setContentPane(panel1);
         setTitle("Add Line Segment");
         setSize(320, 240);
@@ -34,6 +34,8 @@ public class AddLineSegment extends JFrame{
                 lineSegment.setPosition(new Point((int) x1, (int) y1));
                 lineSegment.setProperties(Map.of("startX", x1, "startY", y1, "endX", x2, "endY", y2));
                 paintingPanel.addShape(lineSegment);
+
+                mainWindow.updateShapeDropDown();
                 dispose();
             }
         });

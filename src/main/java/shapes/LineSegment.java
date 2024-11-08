@@ -51,13 +51,14 @@ public class LineSegment implements Shape {
 
     @Override
     public void setFillColor(Color color) {
-        // Can't be filled, should never be used
+        // Can't be filled, will set the color of the line instead
+        setColor(color);
     }
 
     @Override
     public Color getFillColor() {
-        // Can't be filled, should never be used
-        return null;
+        // Can't be filled, will return the color of the line instead
+        return getColor();
     }
 
     @Override
