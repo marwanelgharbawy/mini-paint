@@ -67,6 +67,6 @@ public class Rectangle implements Shape {
 //        g.drawPolygon(xPoints, yPoints, 4);
         g.setColor(this.color != null ? this.color : Color.BLACK);
 //        g.fillRect(position.x, position.y, 100, 50); // Example rectangle
-        g.fillRect(position.x, position.y, (int) width, (int) height);
+        g.drawRect(position.x, position.y, (int) width, (int) height);
     }
 }
