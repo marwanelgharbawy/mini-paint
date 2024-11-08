@@ -9,7 +9,7 @@ public class Rectangle implements Shape {
     private Color fillColor;
     private double height;
     private double width;
-    private int id;
+    protected int id;
     private static int rectangleCounter = 0;
 
     public Rectangle() {

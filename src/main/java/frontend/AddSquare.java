@@ -16,7 +16,7 @@ public class AddSquare extends JFrame {
     private JButton backButton;
     private JButton addButton;
 
-    public AddSquare(PaintingPanel paintingPanel) {
+    public AddSquare(PaintingPanel paintingPanel, MainWindow mainWindow) {
         setContentPane(panel1);
         setTitle("Add Square");
         setSize(320, 240);
@@ -31,6 +31,8 @@ public class AddSquare extends JFrame {
                 square.setPosition(new Point((int) x, (int) y));
                 square.setProperties(Map.of("side", side));
                 paintingPanel.addShape(square);
+
+                mainWindow.updateShapeDropDown();
                 dispose();
             }
         });

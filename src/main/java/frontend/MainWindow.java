@@ -103,7 +103,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Square button clicked");
-                new AddSquare(canvas);
+                new AddSquare(canvas, MainWindow.this);
             }
         });
 
@@ -111,7 +111,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Circle button clicked");
-                new AddCircle(canvas);
+//                new AddCircle(canvas, MainWindow.this);
             }
         });
 
@@ -119,7 +119,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Line Segment button clicked");
-                new AddLineSegment(canvas);
+//                new AddLineSegment(canvas, MainWindow.this);
             }
         });
 
