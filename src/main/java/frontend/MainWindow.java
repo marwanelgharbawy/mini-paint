@@ -129,7 +129,6 @@ public class MainWindow extends JFrame {
                 System.out.println("Colorize button clicked");
 
                 if (shapeDropDown.getItemCount() == 0) { // No shapes to colorize
-                    // Show a dialog box
                     JOptionPane.showMessageDialog(null, "No shapes to colorize", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -148,6 +147,18 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Delete button clicked");
+
+                if (shapeDropDown.getItemCount() == 0) { // No shapes to delete
+                    JOptionPane.showMessageDialog(null, "No shapes to delete", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                if (selectedShape != null) {
+                    canvas.getGraphicsEngine().removeShape(selectedShape);
+                    updateShapeDropDown();
+                    canvas.repaint();
+                }
             }
         });
     }
