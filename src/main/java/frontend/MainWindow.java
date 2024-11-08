@@ -1,7 +1,5 @@
 package frontend;
 
-import shapes.Rectangle;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -105,6 +103,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Circle button clicked");
+                new AddCircle(canvas);
             }
         });
 
