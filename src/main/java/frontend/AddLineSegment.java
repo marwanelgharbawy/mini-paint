@@ -1,6 +1,7 @@
 package frontend;
 
 import shapes.LineSegment;
+import backend.Validations;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,17 @@ public class AddLineSegment extends JFrame{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                if (!Validations.isNumberValid(startX.getText()) || !Validations.isNumberValid(startY.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid start position.");
+                    return;
+                }
+
+                if (!Validations.isNumberValid(endX.getText()) || !Validations.isNumberValid(endY.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid end position.");
+                    return;
+                }
+
                 double x1 = Double.parseDouble(startX.getText());
                 double y1 = Double.parseDouble(startY.getText());
                 double x2 = Double.parseDouble(endX.getText());
