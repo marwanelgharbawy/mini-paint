@@ -111,6 +111,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Line Segment button clicked");
+                new AddLineSegment(canvas);
             }
         });
 
