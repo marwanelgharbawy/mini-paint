@@ -59,6 +59,6 @@ public class Circle implements Shape {
     @Override
     public void draw(Graphics canvas) {
         canvas.setColor(this.color != null ? this.color : Color.BLACK);
-        canvas.drawOval(position.x, position.y, (int) radius/2, (int) radius/2);
+        canvas.drawOval(position.x, position.y, (int) radius * 2, (int) radius * 2);
     }
 }
