@@ -30,8 +30,8 @@ public class Rectangle implements Shape {
 
     @Override
     public void setProperties(Map<String, Double> properties) { // Width and height
-        this.width = properties.get("width").doubleValue();
-        this.height = properties.get("height").doubleValue();
+        this.width = properties.get("width");
+        this.height = properties.get("height");
     }
 
     @Override
