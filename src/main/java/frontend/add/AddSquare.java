@@ -1,6 +1,8 @@
-package frontend;
+package frontend.add;
 
-import shapes.Rectangle;
+import frontend.MainWindow;
+import frontend.PaintingPanel;
+import shapes.Square;
 import backend.Validations;
 
 import javax.swing.*;
@@ -9,18 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-public class AddRectangle extends JFrame {
+public class AddSquare extends JFrame {
     private JPanel contentPane;
     private JTextField xField;
     private JTextField yField;
-    private JTextField widthField;
-    private JTextField heightField;
+    private JTextField sideField;
     private JButton backButton;
     private JButton addButton;
 
-    public AddRectangle(PaintingPanel paintingPanel, MainWindow mainWindow) {
+    public AddSquare(PaintingPanel paintingPanel, MainWindow mainWindow) {
         setContentPane(contentPane);
-        setTitle("Add Rectangle");
+        setTitle("Add Square");
         setSize(320, 240);
         setVisible(true);
 
@@ -33,19 +34,18 @@ public class AddRectangle extends JFrame {
                     return;
                 }
 
-                if (!Validations.isNumberValid(widthField.getText()) || !Validations.isNumberValid(heightField.getText())) {
-                    JOptionPane.showMessageDialog(null, "Please enter valid dimensions.");
+                if (!Validations.isNumberValid(sideField.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid side length.");
                     return;
                 }
 
                 double x = Double.parseDouble(xField.getText());
                 double y = Double.parseDouble(yField.getText());
-                double width = Double.parseDouble(widthField.getText());
-                double height = Double.parseDouble(heightField.getText());
-                Rectangle rectangle = new Rectangle();
-                rectangle.setPosition(new Point((int) x, (int) y));
-                rectangle.setProperties(Map.of("width", width, "height", height));
-                paintingPanel.addShape(rectangle);
+                double side = Double.parseDouble(sideField.getText());
+                Square square = new Square();
+                square.setPosition(new Point((int) x, (int) y));
+                square.setProperties(Map.of("side", side));
+                paintingPanel.addShape(square);
 
                 mainWindow.updateShapeDropDown();
                 dispose();

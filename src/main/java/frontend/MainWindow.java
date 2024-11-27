@@ -1,12 +1,12 @@
 package frontend;
 
+import frontend.add.*;
 import shapes.Shape;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;

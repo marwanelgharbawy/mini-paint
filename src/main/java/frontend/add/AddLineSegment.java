@@ -1,5 +1,7 @@
-package frontend;
+package frontend.add;
 
+import frontend.MainWindow;
+import frontend.PaintingPanel;
 import shapes.LineSegment;
 import backend.Validations;
 
