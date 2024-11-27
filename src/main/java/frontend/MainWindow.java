@@ -18,6 +18,8 @@ public class MainWindow extends JFrame {
     private JComboBox shapeDropDown;
     private JButton colorizeButton;
     private JButton deleteButton;
+    private JButton moveButton;
+    private JButton resizeButton;
 
     public MainWindow() {
         // Deleted the .form file because I want to add a modified JPanel called PaintingPanel
@@ -31,6 +33,7 @@ public class MainWindow extends JFrame {
         initializeTopPanel();
         initializeLeftPanel();
         initializeCanvas();
+        setComponentSizes();
 
         setSize(1000,600);
         setVisible(true);
@@ -59,22 +62,41 @@ public class MainWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
 
-
         leftPanel.add(new JLabel("Select Shape"), gbc);
+        gbc.gridy++;
         
         // Empty combo box, will add its components later
         shapeDropDown = new JComboBox<>();
-        shapeDropDown.setPreferredSize(new Dimension(150, 25));
-        gbc.gridy++;
+        shapeDropDown.setPreferredSize(new Dimension(100, 25));
         leftPanel.add(shapeDropDown, gbc);
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        buttonPanel.add(colorizeButton = new JButton("Colorize"));
-        buttonPanel.add(deleteButton = new JButton("Delete"));
         gbc.gridy++;
-        leftPanel.add(buttonPanel, gbc);
+
+        // Colorize and Delete buttons
+        JPanel buttonPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        buttonPanel1.add(colorizeButton = new JButton("Colorize"));
+        buttonPanel1.add(deleteButton = new JButton("Delete"));
+
+        leftPanel.add(buttonPanel1, gbc);
+        gbc.gridy++;
+
+
+        // Move and Resize buttons
+        JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        buttonPanel2.add(moveButton = new JButton("Move"));
+        buttonPanel2.add(resizeButton = new JButton("Resize"));
+
+        leftPanel.add(buttonPanel2, gbc);
+        gbc.gridy++;
 
         add(leftPanel, BorderLayout.WEST);
+    }
+
+    private void setComponentSizes() {
+        moveButton.setPreferredSize(new Dimension(100, 25));
+        resizeButton.setPreferredSize(new Dimension(100, 25));
+        colorizeButton.setPreferredSize(new Dimension(100, 25));
+        deleteButton.setPreferredSize(new Dimension(100, 25));
+//        canvas.setMaximumSize(new Dimension(800, 600));
     }
 
     private void initializeCanvas() {
@@ -83,7 +105,7 @@ public class MainWindow extends JFrame {
         add(canvas, BorderLayout.CENTER);
     }
 
-    protected void updateShapeDropDown() {
+    public void updateShapeDropDown() {
         shapeDropDown.removeAllItems();
         for (Shape shape : canvas.getGraphicsEngine().getShapes()) {
             shapeDropDown.addItem(shape); // Override toString() method
@@ -158,6 +180,40 @@ public class MainWindow extends JFrame {
                     canvas.getGraphicsEngine().removeShape(selectedShape);
                     updateShapeDropDown();
                     canvas.repaint();
+                }
+            }
+        });
+
+        moveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Move button clicked");
+
+                if (shapeDropDown.getItemCount() == 0) { // No shapes to move
+                    JOptionPane.showMessageDialog(null, "No shapes to move", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                if (selectedShape != null) {
+//                    new MoveShape(selectedShape, canvas);
+                }
+            }
+        });
+
+        resizeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Resize button clicked");
+
+                if (shapeDropDown.getItemCount() == 0) { // No shapes to resize
+                    JOptionPane.showMessageDialog(null, "No shapes to resize", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                if (selectedShape != null) {
+//                    new ResizeShape(selectedShape, canvas);
                 }
             }
         });
