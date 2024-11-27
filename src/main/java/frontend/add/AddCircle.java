@@ -44,8 +44,7 @@ public class AddCircle extends JFrame {
                 double radius = Double.parseDouble(radiusField.getText());
 
                 Circle circle = new Circle();
-                circle.setPosition(new Point((int) x, (int) y));
-                circle.setProperties(Map.of("radius", radius));
+                circle.setProperties(Map.of("radius", radius, "X", x, "Y", y));
                 paintingPanel.addShape(circle);
 
                 mainWindow.updateShapeDropDown();

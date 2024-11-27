@@ -18,11 +18,13 @@ public class Circle extends Shape {
     @Override
     public void setProperties(Map<String, Double> properties) {
         this.radius = properties.get("radius");
+        this.position.x = properties.get("X").intValue();
+        this.position.y = properties.get("Y").intValue();
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        return Map.of("radius", radius);
+        return Map.of("radius", radius, "X", (double) position.x, "Y", (double) position.y);
     }
 
     @Override

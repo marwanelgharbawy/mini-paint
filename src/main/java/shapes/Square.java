@@ -13,13 +13,17 @@ public class Square extends Rectangle {
     @Override
     public void setProperties(Map<String, Double> properties) {
         double side = properties.get("side");
-        super.setProperties(Map.of("width", side, "height", side));
+        double x = properties.get("X");
+        double y = properties.get("Y");
+        super.setProperties(Map.of("width", side, "height", side, "X", x, "Y", y));
     }
 
     @Override
     public Map<String, Double> getProperties() {
         double side = super.getProperties().get("width"); // Both width and height are the same
-        return Map.of("side", side);
+        int x = super.getPosition().x;
+        int y = super.getPosition().y;
+        return Map.of("side", side, "X", (double) x, "Y", (double) y);
     }
 
     @Override

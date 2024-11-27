@@ -21,11 +21,13 @@ public class Rectangle extends Shape {
     public void setProperties(Map<String, Double> properties) { // Width and height
         this.width = properties.get("width");
         this.height = properties.get("height");
+        this.position.x = properties.get("X").intValue();
+        this.position.y = properties.get("Y").intValue();
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        return Map.of("width", (double) width, "height", (double) height);
+        return Map.of("width", (double) width, "height", (double) height, "X", (double) position.x, "Y", (double) position.y);
     }
 
     @Override

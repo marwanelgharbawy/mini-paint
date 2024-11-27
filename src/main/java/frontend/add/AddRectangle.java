@@ -45,8 +45,7 @@ public class AddRectangle extends JFrame {
                 double width = Double.parseDouble(widthField.getText());
                 double height = Double.parseDouble(heightField.getText());
                 Rectangle rectangle = new Rectangle();
-                rectangle.setPosition(new Point((int) x, (int) y));
-                rectangle.setProperties(Map.of("width", width, "height", height));
+                rectangle.setProperties(Map.of("width", width, "height", height, "X", x, "Y", y));
                 paintingPanel.addShape(rectangle);
 
                 mainWindow.updateShapeDropDown();

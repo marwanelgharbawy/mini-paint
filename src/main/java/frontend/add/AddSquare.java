@@ -43,8 +43,7 @@ public class AddSquare extends JFrame {
                 double y = Double.parseDouble(yField.getText());
                 double side = Double.parseDouble(sideField.getText());
                 Square square = new Square();
-                square.setPosition(new Point((int) x, (int) y));
-                square.setProperties(Map.of("side", side));
+                square.setProperties(Map.of("side", side, "X", x, "Y", y));
                 paintingPanel.addShape(square);
 
                 mainWindow.updateShapeDropDown();
