@@ -3,28 +3,15 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public class LineSegment implements Shape {
-    private Point startPoint;
+public class LineSegment extends Shape {
     private Point endPoint;
-    private Color color;
-    private int id;
     private static int lineCounter = 0;
 
     public LineSegment() {
-        this.startPoint = new Point(0, 0);
+        this.position = new Point(0, 0);
         this.endPoint = new Point(0, 0);
         this.color = null;
         this.id = lineCounter++;
-    }
-
-    @Override
-    public void setPosition(Point position) {
-        this.startPoint = position;
-    }
-
-    @Override
-    public Point getPosition() {
-        return startPoint;
     }
 
     @Override
@@ -33,23 +20,13 @@ public class LineSegment implements Shape {
         double y1 = properties.get("startY");
         double x2 = properties.get("endX");
         double y2 = properties.get("endY");
-        this.startPoint = new Point((int) x1, (int) y1);
+        this.position = new Point((int) x1, (int) y1);
         this.endPoint = new Point((int) x2, (int) y2);
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        return Map.of("startX", (double) startPoint.x, "startY", (double) startPoint.y, "endX", (double) endPoint.x, "endY", (double) endPoint.y);
-    }
-
-    @Override
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    @Override
-    public Color getColor() {
-        return color;
+        return Map.of("startX", (double) position.x, "startY", (double) position.y, "endX", (double) endPoint.x, "endY", (double) endPoint.y);
     }
 
     @Override
@@ -67,7 +44,7 @@ public class LineSegment implements Shape {
     @Override
     public void draw(Graphics canvas) {
         canvas.setColor(this.color != null ? this.color : Color.BLACK);
-        canvas.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+        canvas.drawLine(position.x, position.y, endPoint.x, endPoint.y);
     }
 
     @Override

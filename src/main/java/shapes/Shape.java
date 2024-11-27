@@ -3,21 +3,43 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public interface Shape {
-    // Set position
-    public void setPosition(Point position);
-    public Point getPosition();
+public abstract class Shape implements ShapeInterface {
+    protected Point position;
+    protected Color color;
+    protected Color fillColor;
+    protected int id;
 
-    // Update shape-specific properties, (e.g., radius)
-    public void setProperties(Map<String, Double> properties);
-    public Map<String, Double> getProperties();
+    @Override
+    public void setPosition(Point position) {
+        this.position = position;
+    }
 
-    // Colorize
-    public void setColor(Color color);
-    public Color getColor();
-    public void setFillColor(Color color);
-    public Color getFillColor();
+    @Override
+    public Point getPosition() {
+        return this.position;
+    }
 
-    // Redraw the shape on the canvas
-    public void draw(Graphics canvas);
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public void setFillColor(Color color) {
+        this.fillColor = color;
+    }
+
+    @Override
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public abstract void setProperties(Map<String, Double> properties);
+    public abstract Map<String, Double> getProperties();
+    public abstract void draw(Graphics canvas);
 }

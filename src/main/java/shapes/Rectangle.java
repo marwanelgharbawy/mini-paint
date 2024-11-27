@@ -3,13 +3,9 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public class Rectangle implements Shape {
-    private Point position;
-    private Color color;
-    private Color fillColor;
-    private double height;
-    private double width;
-    protected int id;
+public class Rectangle extends Shape {
+    protected double height;
+    protected double width;
     private static int rectangleCounter = 0;
 
     public Rectangle() {
@@ -22,16 +18,6 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
-    @Override
-    public Point getPosition() {
-        return position;
-    }
-
-    @Override
     public void setProperties(Map<String, Double> properties) { // Width and height
         this.width = properties.get("width");
         this.height = properties.get("height");
@@ -40,26 +26,6 @@ public class Rectangle implements Shape {
     @Override
     public Map<String, Double> getProperties() {
         return Map.of("width", (double) width, "height", (double) height);
-    }
-
-    @Override
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    @Override
-    public Color getColor() {
-        return color;
-    }
-
-    @Override
-    public void setFillColor(Color color) {
-        this.fillColor = color;
-    }
-
-    @Override
-    public Color getFillColor() {
-        return fillColor;
     }
 
     @Override

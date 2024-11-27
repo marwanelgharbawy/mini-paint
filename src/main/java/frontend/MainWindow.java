@@ -213,7 +213,18 @@ public class MainWindow extends JFrame {
 
                 Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
-//                    new ResizeShape(selectedShape, canvas);
+                    // Depending on the shape, a different dialog will be shown
+                    switch (selectedShape) {
+                        // Will be commented until the classes are created
+//                        case shapes.Square square -> new ResizeRectangle(selectedShape, canvas);
+//                        case shapes.Rectangle rectangle -> new ResizeSquare(selectedShape, canvas);
+//                        case shapes.Circle circle -> new ResizeCircle(selectedShape, canvas);
+//                        case shapes.LineSegment lineSegment -> new ResizeLineSegment(selectedShape, canvas);
+                        default -> { // Unknown shape
+                            System.out.println("Error, shape type not recognized");
+                            JOptionPane.showMessageDialog(null, "An error has occured", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 }
             }
         });

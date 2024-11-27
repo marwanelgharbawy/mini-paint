@@ -3,12 +3,10 @@ package shapes;
 import java.util.Map;
 
 public class Square extends Rectangle {
-    private double sideLength;
     private static int squareCounter = 0;
 
     public Square() {
         super();
-        this.sideLength = 0;
         this.id = squareCounter++;
     }
 
@@ -20,7 +18,7 @@ public class Square extends Rectangle {
 
     @Override
     public Map<String, Double> getProperties() {
-        double side = super.getProperties().get("width");
+        double side = super.getProperties().get("width"); // Both width and height are the same
         return Map.of("side", side);
     }
 
