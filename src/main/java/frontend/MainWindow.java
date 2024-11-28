@@ -196,7 +196,7 @@ public class MainWindow extends JFrame {
 
                 Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
-//                    new MoveShape(selectedShape, canvas);
+                    new MoveShape(selectedShape, canvas);
                 }
             }
         });
