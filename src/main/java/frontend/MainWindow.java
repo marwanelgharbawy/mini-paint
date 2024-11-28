@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
-import java.util.List;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;
@@ -216,10 +215,10 @@ public class MainWindow extends JFrame {
                 }
 
                 AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
-                if (selectedShape instanceof LineSegment) {
-                    new ModifyLine((LineSegment) selectedShape, canvas);
-                    return;
-                }
+//                if (selectedShape instanceof LineSegment) {
+//                    new ModifyLine((LineSegment) selectedShape, canvas);
+//                    return;
+//                }
 
                 if (selectedShape != null) {
                     new MoveShape(selectedShape, canvas);
