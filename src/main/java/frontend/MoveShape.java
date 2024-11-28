@@ -32,6 +32,7 @@ public class MoveShape extends JFrame {
 
                 double x = Double.parseDouble(xField.getText());
                 double y = Double.parseDouble(yField.getText());
+                Utilities.warnIfOutOfBorder(x, y);
 
                 // Special case for line segment: we need to update the end point as well
                 if (shape instanceof LineSegment) {

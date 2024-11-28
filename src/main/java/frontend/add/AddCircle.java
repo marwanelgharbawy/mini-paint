@@ -2,6 +2,7 @@ package frontend.add;
 
 import frontend.MainWindow;
 import frontend.PaintingPanel;
+import frontend.Utilities;
 import shapes.Circle;
 import backend.Validations;
 
@@ -42,6 +43,8 @@ public class AddCircle extends JFrame {
                 double x = Double.parseDouble(xField.getText());
                 double y = Double.parseDouble(yField.getText());
                 double radius = Double.parseDouble(radiusField.getText());
+
+                Utilities.warnIfOutOfBorder(x, y);
 
                 Circle circle = new Circle();
                 circle.setProperties(Map.of("radius", radius, "X", x, "Y", y));

@@ -2,6 +2,7 @@ package frontend.add;
 
 import frontend.MainWindow;
 import frontend.PaintingPanel;
+import frontend.Utilities;
 import shapes.LineSegment;
 import backend.Validations;
 
@@ -44,6 +45,8 @@ public class AddLineSegment extends JFrame{
                 double y1 = Double.parseDouble(startY.getText());
                 double x2 = Double.parseDouble(endX.getText());
                 double y2 = Double.parseDouble(endY.getText());
+                Utilities.warnIfOutOfBorder(x1, y1, x2, y2);
+
                 LineSegment lineSegment = new LineSegment();
                 lineSegment.setPosition(new Point((int) x1, (int) y1));
                 lineSegment.setProperties(Map.of("startX", x1, "startY", y1, "endX", x2, "endY", y2));

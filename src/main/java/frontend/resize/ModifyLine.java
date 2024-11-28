@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import backend.Validations;
 import frontend.PaintingPanel;
+import frontend.Utilities;
 import shapes.LineSegment;
 
 import java.awt.event.ActionEvent;
@@ -36,6 +37,7 @@ public class ModifyLine extends JFrame {
             double y1 = Double.parseDouble(startY.getText());
             double x2 = Double.parseDouble(endX.getText());
             double y2 = Double.parseDouble(endY.getText());
+            Utilities.warnIfOutOfBorder(x1, y1, x2, y2);
             line.setProperties(Map.of("startX", x1, "startY", y1, "endX", x2, "endY", y2));
             canvas.repaint();
             dispose();

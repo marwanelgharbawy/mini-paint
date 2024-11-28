@@ -2,6 +2,7 @@ package frontend.add;
 
 import frontend.MainWindow;
 import frontend.PaintingPanel;
+import frontend.Utilities;
 import shapes.Rectangle;
 import backend.Validations;
 
@@ -44,6 +45,9 @@ public class AddRectangle extends JFrame {
                 double y = Double.parseDouble(yField.getText());
                 double width = Double.parseDouble(widthField.getText());
                 double height = Double.parseDouble(heightField.getText());
+
+                Utilities.warnIfOutOfBorder(x, y, width, height);
+
                 Rectangle rectangle = new Rectangle();
                 rectangle.setProperties(Map.of("width", width, "height", height, "X", x, "Y", y));
                 paintingPanel.addShape(rectangle);

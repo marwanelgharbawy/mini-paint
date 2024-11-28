@@ -2,6 +2,7 @@ package frontend.add;
 
 import frontend.MainWindow;
 import frontend.PaintingPanel;
+import frontend.Utilities;
 import shapes.Square;
 import backend.Validations;
 
@@ -42,6 +43,9 @@ public class AddSquare extends JFrame {
                 double x = Double.parseDouble(xField.getText());
                 double y = Double.parseDouble(yField.getText());
                 double side = Double.parseDouble(sideField.getText());
+
+                Utilities.warnIfOutOfBorder(x, y);
+
                 Square square = new Square();
                 square.setProperties(Map.of("side", side, "X", x, "Y", y));
                 paintingPanel.addShape(square);
