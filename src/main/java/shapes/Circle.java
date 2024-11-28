@@ -1,6 +1,7 @@
 package shapes;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Circle extends AbstractShape {
@@ -20,15 +21,22 @@ public class Circle extends AbstractShape {
         if (properties.get("radius") != null) {
             this.radius = properties.get("radius");
         }
-        if (properties.get("X") != null && properties.get("Y") != null) {
-            this.position.x = properties.get("X").intValue();
-            this.position.y = properties.get("Y").intValue();
-        }
+        super.setProperties(properties);
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        return Map.of("radius", radius, "X", (double) position.x, "Y", (double) position.y);
+        Map<String, Double> properties = new HashMap<>();
+        properties.put("X", (double) position.x);
+        properties.put("Y", (double) position.y);
+        properties.put("radius", radius);
+        if (color != null) {
+            properties.put("color", (double) color.getRGB());
+        }
+        if (fillColor != null) {
+            properties.put("fillColor", (double) fillColor.getRGB());
+        }
+        return properties;
     }
 
     @Override

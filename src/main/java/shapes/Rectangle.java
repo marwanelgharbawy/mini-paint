@@ -1,6 +1,7 @@
 package shapes;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Rectangle extends AbstractShape {
@@ -23,15 +24,23 @@ public class Rectangle extends AbstractShape {
             this.width = properties.get("width");
             this.height = properties.get("height");
         }
-        if (properties.get("X") != null && properties.get("Y") != null) {
-            this.position.x = properties.get("X").intValue();
-            this.position.y = properties.get("Y").intValue();
-        }
+        super.setProperties(properties);
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        return Map.of("width", (double) width, "height", (double) height, "X", (double) position.x, "Y", (double) position.y);
+        Map<String, Double> properties = new HashMap<>();
+        properties.put("X", (double) position.x);
+        properties.put("Y", (double) position.y);
+        properties.put("width", width);
+        properties.put("height", height);
+        if (color != null) {
+            properties.put("color", (double) color.getRGB());
+        }
+        if (fillColor != null) {
+            properties.put("fillColor", (double) fillColor.getRGB());
+        }
+        return properties;
     }
 
     @Override

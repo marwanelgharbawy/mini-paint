@@ -1,5 +1,6 @@
 package shapes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Square extends Rectangle {
@@ -18,14 +19,21 @@ public class Square extends Rectangle {
         if (properties.get("X") != null && properties.get("Y") != null) {
             super.setProperties(Map.of("X", properties.get("X"), "Y", properties.get("Y")));
         }
+        if (properties.get("color") != null) {
+            super.setProperties(Map.of("color", properties.get("color")));
+        }
+        if (properties.get("fillColor") != null) {
+            super.setProperties(Map.of("fillColor", properties.get("fillColor")));
+        }
     }
 
     @Override
     public Map<String, Double> getProperties() {
-        double side = super.getProperties().get("width"); // Both width and height are the same
-        int x = super.getPosition().x;
-        int y = super.getPosition().y;
-        return Map.of("side", side, "X", (double) x, "Y", (double) y);
+        Map<String, Double> properties = super.getProperties();
+        properties.put("side", width);
+        properties.remove("width");
+        properties.remove("height");
+        return properties;
     }
 
     @Override
