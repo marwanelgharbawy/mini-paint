@@ -23,8 +23,10 @@ public class Rectangle extends AbstractShape {
             this.width = properties.get("width");
             this.height = properties.get("height");
         }
-        this.position.x = properties.get("X").intValue();
-        this.position.y = properties.get("Y").intValue();
+        if (properties.get("X") != null && properties.get("Y") != null) {
+            this.position.x = properties.get("X").intValue();
+            this.position.y = properties.get("Y").intValue();
+        }
     }
 
     @Override
