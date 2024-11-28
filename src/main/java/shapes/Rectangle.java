@@ -18,9 +18,11 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public void setProperties(Map<String, Double> properties) { // Width and height
-        this.width = properties.get("width");
-        this.height = properties.get("height");
+    public void setProperties(Map<String, Double> properties) {
+        if (properties.get("width") != null && properties.get("height") != null) {
+            this.width = properties.get("width");
+            this.height = properties.get("height");
+        }
         this.position.x = properties.get("X").intValue();
         this.position.y = properties.get("Y").intValue();
     }
