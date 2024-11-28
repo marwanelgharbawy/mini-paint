@@ -9,6 +9,7 @@ import shapes.LineSegment;
 import shapes.Rectangle;
 import shapes.Square;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -201,6 +202,11 @@ public class MainWindow extends JFrame {
                 }
 
                 AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
+                if (selectedShape instanceof LineSegment) {
+                    new ModifyLine((LineSegment) selectedShape, canvas);
+                    return;
+                }
+
                 if (selectedShape != null) {
                     new MoveShape(selectedShape, canvas);
                 }
@@ -224,7 +230,7 @@ public class MainWindow extends JFrame {
                         case Square square -> new ResizeSquare((Square) selectedShape, canvas);
                         case Rectangle rectangle -> new ResizeRectangle((Rectangle) selectedShape, canvas);
                         case Circle circle -> new ResizeCircle((Circle) selectedShape, canvas);
-//                        case LineSegment lineSegment -> new ResizeLineSegment(selectedShape, canvas);
+                        case LineSegment lineSegment -> new ModifyLine((LineSegment) selectedShape, canvas);
                         default -> { // Unknown shape
                             System.out.println("Error, shape type not recognized");
                             JOptionPane.showMessageDialog(null, "An error has occurred", "Error", JOptionPane.ERROR_MESSAGE);
