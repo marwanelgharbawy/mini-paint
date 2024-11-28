@@ -51,4 +51,8 @@ public class LineSegment extends AbstractShape {
     public String toString() {
         return "line" + id;
     }
+
+    public static void resetCounter() {
+        lineCounter = 0;
+    }
 }

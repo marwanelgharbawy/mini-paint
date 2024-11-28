@@ -277,18 +277,25 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Load button clicked");
-
-                JFileChooser fileChooser = new JFileChooser("src/main/resources/savefiles");
-                int response = fileChooser.showOpenDialog(null);
-                switch (response) {
-                    case JFileChooser.APPROVE_OPTION -> {
-                        System.out.println("Save file selected");
-                        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                        loadShapesFromFile(filePath);
+                int response = JOptionPane.YES_OPTION;
+                if (shapeDropDown.getItemCount() > 0) {
+                    response = JOptionPane.showConfirmDialog(null, "Unsaved changes will be lost. Do you want to continue?", "Confirm", JOptionPane.YES_NO_OPTION);
+                }
+                if (response == JOptionPane.YES_OPTION) {
+                    JFileChooser fileChooser = new JFileChooser("src/main/resources/savefiles");
+                    int fileResponse = fileChooser.showOpenDialog(null);
+                    switch (fileResponse) {
+                        case JFileChooser.APPROVE_OPTION -> {
+                            System.out.println("Save file selected");
+                            String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                            // Clear existing shapes
+                            clearAllShapes();
+                            loadShapesFromFile(filePath);
+                        }
+                        case JFileChooser.CANCEL_OPTION -> System.out.println("Save file selection canceled");
+                        case JFileChooser.ERROR_OPTION -> System.out.println("Error occurred");
+                        default -> System.out.println("Unknown response");
                     }
-                    case JFileChooser.CANCEL_OPTION -> System.out.println("Save file selection canceled");
-                    case JFileChooser.ERROR_OPTION -> System.out.println("Error occurred");
-                    default -> System.out.println("Unknown response");
                 }
             }
         });
@@ -370,15 +377,24 @@ public class MainWindow extends JFrame {
                 canvas.getGraphicsEngine().addShape(shape);
             }
             canvas.repaint();
+            updateShapeDropDown();
             JOptionPane.showMessageDialog(null, "Shapes loaded successfully.");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error loading shapes: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void clearAllShapes() {
+    private void clearAllShapes() {
         canvas.deleteAllShapes();
+        resetShapesId();
         updateShapeDropDown();
+    }
+
+    private void resetShapesId() {
+        Square.resetCounter();
+        Rectangle.resetCounter();
+        Circle.resetCounter();
+        LineSegment.resetCounter();
     }
 
     public static void main(String[] args) {

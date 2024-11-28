@@ -40,4 +40,8 @@ public class Square extends Rectangle {
     public String toString() {
         return "Square" + id;
     }
+
+    public static void resetCounter() {
+        squareCounter = 0;
+    }
 }

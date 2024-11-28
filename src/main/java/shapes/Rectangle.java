@@ -58,4 +58,8 @@ public class Rectangle extends AbstractShape {
     public String toString() {
         return "rectangle" + id;
     }
+
+    public static void resetCounter() {
+        rectangleCounter = 0;
+    }
 }

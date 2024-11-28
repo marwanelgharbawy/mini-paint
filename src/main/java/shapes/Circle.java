@@ -53,4 +53,8 @@ public class Circle extends AbstractShape {
     public String toString() {
         return "Circle" + id;
     }
+
+    public static void resetCounter() {
+        circleCounter = 0;
+    }
 }
