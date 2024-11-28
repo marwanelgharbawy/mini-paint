@@ -12,12 +12,11 @@ public class Square extends Rectangle {
 
     @Override
     public void setProperties(Map<String, Double> properties) {
-        double x = properties.get("X");
-        double y = properties.get("Y");
         if (properties.get("side") != null) {
-            super.setProperties(Map.of("width", properties.get("side"), "height", properties.get("side"), "X", x, "Y", y));
-        } else {
-            super.setProperties(Map.of("X", x, "Y", y));
+            super.setProperties(Map.of("width", properties.get("side"), "height", properties.get("side")));
+        }
+        if (properties.get("X") != null && properties.get("Y") != null) {
+            super.setProperties(Map.of("X", properties.get("X"), "Y", properties.get("Y")));
         }
     }
 

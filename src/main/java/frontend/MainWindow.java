@@ -2,7 +2,12 @@ package frontend;
 
 import frontend.add.*;
 import frontend.resize.*;
-import shapes.*;
+
+import shapes.AbstractShape;
+import shapes.Circle;
+import shapes.LineSegment;
+import shapes.Rectangle;
+import shapes.Square;
 
 import javax.swing.*;
 import java.awt.*;
@@ -216,9 +221,8 @@ public class MainWindow extends JFrame {
                 if (selectedShape != null) {
                     // Depending on the shape, a different dialog will be shown
                     switch (selectedShape) {
-                        // Will be commented until the classes are created
-//                        case Square square -> new ResizeRectangle(selectedShape, canvas);
-//                        case Rectangle rectangle -> new ResizeSquare(selectedShape, canvas);
+                        case Square square -> new ResizeSquare((Square) selectedShape, canvas);
+                        case Rectangle rectangle -> new ResizeRectangle((Rectangle) selectedShape, canvas);
                         case Circle circle -> new ResizeCircle((Circle) selectedShape, canvas);
 //                        case LineSegment lineSegment -> new ResizeLineSegment(selectedShape, canvas);
                         default -> { // Unknown shape
