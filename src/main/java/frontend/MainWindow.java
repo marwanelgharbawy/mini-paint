@@ -9,11 +9,14 @@ import shapes.LineSegment;
 import shapes.Rectangle;
 import shapes.Square;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;
@@ -27,6 +30,8 @@ public class MainWindow extends JFrame {
     private JButton deleteButton;
     private JButton moveButton;
     private JButton resizeButton;
+    private JButton saveButton;
+    private JButton loadButton;
 
     public MainWindow() {
         // Deleted the .form file because I want to add a modified JPanel called PaintingPanel
@@ -69,6 +74,14 @@ public class MainWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
 
+        // Save and Load buttons
+        JPanel saveAndLoadPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 50));
+        saveAndLoadPanel.add(saveButton = new JButton("Save"));
+        saveAndLoadPanel.add(loadButton = new JButton("Load"));
+
+        leftPanel.add(saveAndLoadPanel, gbc);
+        gbc.gridy++;
+
         leftPanel.add(new JLabel("Select Shape"), gbc);
         gbc.gridy++;
         
@@ -79,26 +92,28 @@ public class MainWindow extends JFrame {
         gbc.gridy++;
 
         // Colorize and Delete buttons
-        JPanel buttonPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        buttonPanel1.add(colorizeButton = new JButton("Colorize"));
-        buttonPanel1.add(deleteButton = new JButton("Delete"));
+        JPanel colorizeAndDeletePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        colorizeAndDeletePanel.add(colorizeButton = new JButton("Colorize"));
+        colorizeAndDeletePanel.add(deleteButton = new JButton("Delete"));
 
-        leftPanel.add(buttonPanel1, gbc);
+        leftPanel.add(colorizeAndDeletePanel, gbc);
         gbc.gridy++;
 
 
         // Move and Resize buttons
-        JPanel buttonPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        buttonPanel2.add(moveButton = new JButton("Move"));
-        buttonPanel2.add(resizeButton = new JButton("Resize"));
+        JPanel moveAndResizePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        moveAndResizePanel.add(moveButton = new JButton("Move"));
+        moveAndResizePanel.add(resizeButton = new JButton("Resize"));
 
-        leftPanel.add(buttonPanel2, gbc);
+        leftPanel.add(moveAndResizePanel, gbc);
         gbc.gridy++;
 
         add(leftPanel, BorderLayout.WEST);
     }
 
     private void setComponentSizes() {
+        saveButton.setPreferredSize(new Dimension(100, 25));
+        loadButton.setPreferredSize(new Dimension(100, 25));
         moveButton.setPreferredSize(new Dimension(100, 25));
         resizeButton.setPreferredSize(new Dimension(100, 25));
         colorizeButton.setPreferredSize(new Dimension(100, 25));
@@ -239,6 +254,94 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Save button clicked");
+                JFileChooser fileChooser = new JFileChooser("src/main/resources");
+                int response = fileChooser.showSaveDialog(null);
+                switch (response) {
+                    case JFileChooser.APPROVE_OPTION -> {
+                        System.out.println("Save file selected");
+                        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                        saveShapesToFile(filePath);
+                    }
+                    case JFileChooser.CANCEL_OPTION -> System.out.println("Save file selection canceled");
+                    case JFileChooser.ERROR_OPTION -> System.out.println("Error occurred");
+                    default -> System.out.println("Unknown response");
+                }
+            }
+        });
+
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Load button clicked");
+
+                JFileChooser fileChooser = new JFileChooser("src/main/resources");
+                int response = fileChooser.showOpenDialog(null);
+                switch (response) {
+                    case JFileChooser.APPROVE_OPTION -> {
+                        System.out.println("Save file selected");
+                        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                        loadShapesFromFile(filePath);
+                    }
+                    case JFileChooser.CANCEL_OPTION -> System.out.println("Save file selection canceled");
+                    case JFileChooser.ERROR_OPTION -> System.out.println("Error occurred");
+                    default -> System.out.println("Unknown response");
+                }
+
+                clearAllShapes();
+//                canvas.load();
+            }
+        });
+    }
+
+    private void saveShapesToFile(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (AbstractShape shape : canvas.getGraphicsEngine().getShapes()) { // Loop through all shapes
+                System.out.println("Saving shape: " + shape);
+                Map<String, Double> properties = shape.getProperties();
+
+                // Build properties string
+                StringBuilder propertiesString = new StringBuilder();
+                for (Map.Entry<String, Double> entry : properties.entrySet()) { // Loop through all properties
+                    System.out.println("Adding property: " + entry.getKey() + "=" + entry.getValue());
+                    propertiesString.append(entry.getKey())
+                            .append(" ")
+                            .append(entry.getValue())
+                            .append(", "); // Add separator
+                }
+
+                // Remove comma and space for last property
+                propertiesString.setLength(propertiesString.length() - 2);
+
+                // Write shape and properties to the file
+                writer.write(shape.getClass().getSimpleName() + ": " + propertiesString);
+                writer.newLine();
+            }
+            JOptionPane.showMessageDialog(null, "Shapes saved successfully.");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error saving shapes: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadShapesFromFile(String filePath) {
+        try {
+            // Read file
+            // Parse shapes
+            // Add shapes to canvas
+            // Repaint canvas
+            JOptionPane.showMessageDialog(null, "Shapes loaded successfully.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error loading shapes: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void clearAllShapes() {
+        canvas.deleteAllShapes();
+        updateShapeDropDown();
     }
 
     public static void main(String[] args) {

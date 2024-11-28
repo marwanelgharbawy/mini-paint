@@ -33,4 +33,8 @@ public class GraphicsEngine implements DrawingEngine {
             shape.draw(canvas);
         }
     }
+
+    public void deleteAllShapes() {
+        shapes.clear();
+    }
 }

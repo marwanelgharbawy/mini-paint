@@ -30,4 +30,9 @@ public class PaintingPanel extends JPanel {
     public GraphicsEngine getGraphicsEngine() {
         return graphicsEngine;
     }
+
+    public void deleteAllShapes () {
+        graphicsEngine.deleteAllShapes();
+        repaint();
+    }
 }
