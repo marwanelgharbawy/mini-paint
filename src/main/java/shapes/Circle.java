@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public class Circle extends Shape {
+public class Circle extends AbstractShape {
     private double radius;
     private static int circleCounter = 0;
 
@@ -20,8 +20,10 @@ public class Circle extends Shape {
         if (properties.get("radius") != null) {
             this.radius = properties.get("radius");
         }
-        this.position.x = properties.get("X").intValue();
-        this.position.y = properties.get("Y").intValue();
+        if (properties.get("X") != null && properties.get("Y") != null) {
+            this.position.x = properties.get("X").intValue();
+            this.position.y = properties.get("Y").intValue();
+        }
     }
 
     @Override

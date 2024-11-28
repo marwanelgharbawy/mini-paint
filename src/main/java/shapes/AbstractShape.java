@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public abstract class Shape implements ShapeInterface {
+public abstract class AbstractShape implements ShapeInterface {
     protected Point position;
     protected Color color;
     protected Color fillColor;

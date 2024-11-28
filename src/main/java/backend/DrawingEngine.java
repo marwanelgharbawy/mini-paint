@@ -1,16 +1,16 @@
 package backend;
 
-import shapes.Shape;
+import shapes.AbstractShape;
 
 import java.awt.Graphics;
 
 public interface DrawingEngine {
     // Manage shapes objects
-    public void addShape(Shape shape);
-    public void removeShape(Shape shape);
+    public void addShape(AbstractShape shape);
+    public void removeShape(AbstractShape shape);
 
     // Return the created shape objects
-    public Shape[] getShapes();
+    public AbstractShape[] getShapes();
 
     // Redraw all shapes on the canvas
     public void refresh(Graphics canvas);

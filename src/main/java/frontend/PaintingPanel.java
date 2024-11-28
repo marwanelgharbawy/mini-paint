@@ -1,7 +1,7 @@
 package frontend;
 
 import backend.GraphicsEngine;
-import shapes.Shape;
+import shapes.AbstractShape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class PaintingPanel extends JPanel {
         graphicsEngine = new GraphicsEngine();
     }
 
-    public void addShape(Shape shape) {
+    public void addShape(AbstractShape shape) {
         graphicsEngine.addShape(shape);
         repaint();
     }

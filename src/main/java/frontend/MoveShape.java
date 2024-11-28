@@ -1,11 +1,9 @@
 package frontend;
 
-import frontend.PaintingPanel;
-import shapes.Shape;
+import shapes.AbstractShape;
 import backend.Validations;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -17,7 +15,7 @@ public class MoveShape extends JFrame {
     private JButton moveButton;
     private JPanel contentPane;
 
-    public MoveShape(Shape shape, PaintingPanel canvas) {
+    public MoveShape(AbstractShape shape, PaintingPanel canvas) {
         setContentPane(contentPane);
         setTitle("Move Shape");
         setSize(320, 240);

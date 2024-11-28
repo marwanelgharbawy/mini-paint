@@ -1,7 +1,8 @@
 package frontend;
 
 import frontend.add.*;
-import shapes.Shape;
+import frontend.resize.*;
+import shapes.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -107,7 +108,7 @@ public class MainWindow extends JFrame {
 
     public void updateShapeDropDown() {
         shapeDropDown.removeAllItems();
-        for (Shape shape : canvas.getGraphicsEngine().getShapes()) {
+        for (AbstractShape shape : canvas.getGraphicsEngine().getShapes()) {
             shapeDropDown.addItem(shape); // Override toString() method
         }
     }
@@ -157,7 +158,7 @@ public class MainWindow extends JFrame {
 
                 Color color = JColorChooser.showDialog(null, "Choose a color", Color.BLACK);
 
-                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
                     selectedShape.setFillColor(color);
                     canvas.repaint();
@@ -175,7 +176,7 @@ public class MainWindow extends JFrame {
                     return;
                 }
 
-                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
                     canvas.getGraphicsEngine().removeShape(selectedShape);
                     updateShapeDropDown();
@@ -194,7 +195,7 @@ public class MainWindow extends JFrame {
                     return;
                 }
 
-                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
                     new MoveShape(selectedShape, canvas);
                 }
@@ -211,18 +212,18 @@ public class MainWindow extends JFrame {
                     return;
                 }
 
-                Shape selectedShape = (Shape) shapeDropDown.getSelectedItem();
+                AbstractShape selectedShape = (AbstractShape) shapeDropDown.getSelectedItem();
                 if (selectedShape != null) {
                     // Depending on the shape, a different dialog will be shown
                     switch (selectedShape) {
                         // Will be commented until the classes are created
-//                        case shapes.Square square -> new ResizeRectangle(selectedShape, canvas);
-//                        case shapes.Rectangle rectangle -> new ResizeSquare(selectedShape, canvas);
-//                        case shapes.Circle circle -> new ResizeCircle(selectedShape, canvas);
-//                        case shapes.LineSegment lineSegment -> new ResizeLineSegment(selectedShape, canvas);
+//                        case Square square -> new ResizeRectangle(selectedShape, canvas);
+//                        case Rectangle rectangle -> new ResizeSquare(selectedShape, canvas);
+                        case Circle circle -> new ResizeCircle((Circle) selectedShape, canvas);
+//                        case LineSegment lineSegment -> new ResizeLineSegment(selectedShape, canvas);
                         default -> { // Unknown shape
                             System.out.println("Error, shape type not recognized");
-                            JOptionPane.showMessageDialog(null, "An error has occured", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "An error has occurred", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }

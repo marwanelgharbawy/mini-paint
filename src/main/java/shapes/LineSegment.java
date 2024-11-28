@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public class LineSegment extends Shape {
+public class LineSegment extends AbstractShape {
     private Point endPoint;
     private static int lineCounter = 0;
 

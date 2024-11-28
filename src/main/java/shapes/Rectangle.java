@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.Map;
 
-public class Rectangle extends Shape {
+public class Rectangle extends AbstractShape {
     protected double height;
     protected double width;
     private static int rectangleCounter = 0;

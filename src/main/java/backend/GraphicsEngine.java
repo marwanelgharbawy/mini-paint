@@ -1,35 +1,35 @@
 package backend;
 
-import shapes.Shape;
+import shapes.AbstractShape;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class GraphicsEngine implements DrawingEngine {
-    private ArrayList<Shape> shapes = new ArrayList<Shape>();
+    private ArrayList<AbstractShape> shapes = new ArrayList<AbstractShape>();
 
     public GraphicsEngine() {
-        shapes = new ArrayList<Shape>();
+        shapes = new ArrayList<AbstractShape>();
     }
 
     @Override
-    public void addShape(Shape shape) {
+    public void addShape(AbstractShape shape) {
         shapes.add(shape);
     }
 
     @Override
-    public void removeShape(Shape shape) {
+    public void removeShape(AbstractShape shape) {
         shapes.remove(shape);
     }
 
     @Override
-    public Shape[] getShapes() {
-        return shapes.toArray(new Shape[0]);
+    public AbstractShape[] getShapes() {
+        return shapes.toArray(new AbstractShape[0]);
     }
 
     @Override
     public void refresh(Graphics canvas) {
-        for (Shape shape : shapes) {
+        for (AbstractShape shape : shapes) {
             shape.draw(canvas);
         }
     }
