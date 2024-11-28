@@ -279,7 +279,7 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Load button clicked");
 
-                JFileChooser fileChooser = new JFileChooser("src/main/resources");
+                JFileChooser fileChooser = new JFileChooser("src/main/resources/savefiles");
                 int response = fileChooser.showOpenDialog(null);
                 switch (response) {
                     case JFileChooser.APPROVE_OPTION -> {
