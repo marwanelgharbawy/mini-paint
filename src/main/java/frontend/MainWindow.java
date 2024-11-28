@@ -13,10 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
+import java.util.List;
 
 public class MainWindow extends JFrame {
     private JPanel contentPane;
@@ -259,7 +258,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save button clicked");
-                JFileChooser fileChooser = new JFileChooser("src/main/resources");
+                JFileChooser fileChooser = new JFileChooser("src/main/resources/savefiles");
                 int response = fileChooser.showSaveDialog(null);
                 switch (response) {
                     case JFileChooser.APPROVE_OPTION -> {
@@ -291,9 +290,6 @@ public class MainWindow extends JFrame {
                     case JFileChooser.ERROR_OPTION -> System.out.println("Error occurred");
                     default -> System.out.println("Unknown response");
                 }
-
-                clearAllShapes();
-//                canvas.load();
             }
         });
     }
@@ -311,14 +307,14 @@ public class MainWindow extends JFrame {
                     propertiesString.append(entry.getKey())
                             .append(" ")
                             .append(entry.getValue())
-                            .append(", "); // Add separator
+                            .append(","); // Add separator
                 }
 
-                // Remove comma and space for last property
-                propertiesString.setLength(propertiesString.length() - 2);
+                // Remove comma for last property
+                propertiesString.setLength(propertiesString.length() - 1);
 
                 // Write shape and properties to the file
-                writer.write(shape.getClass().getSimpleName() + ": " + propertiesString);
+                writer.write(shape.getClass().getSimpleName() + ":" + propertiesString);
                 writer.newLine();
             }
             JOptionPane.showMessageDialog(null, "Shapes saved successfully.");
@@ -330,9 +326,50 @@ public class MainWindow extends JFrame {
     private void loadShapesFromFile(String filePath) {
         try {
             // Read file
-            // Parse shapes
-            // Add shapes to canvas
-            // Repaint canvas
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            // Example file:
+                // Rectangle:Y 12.0,X 123.0,height 60.0,width 50.0
+                // Square:side 80.0,Y 20.0,X 500.0
+                // Circle:Y 100.0,X 20.0,radius 50.0
+            String line;
+            while ((line = reader.readLine()) != null) { // Read line
+                // Split line by ":"
+                String[] shapeTypeAndProperties = line.split(":");
+                // Get shape type
+                String shapeType = shapeTypeAndProperties[0];
+                System.out.println("Shape type: " + shapeType);
+                // Get properties and split them by ","
+                String[] properties = shapeTypeAndProperties[1].split(",");
+                System.out.println("Properties: " + Arrays.toString(properties));
+                // Create a map to store properties
+                Map<String, Double> propertiesMap = new HashMap<>();
+                // Loop through properties
+                for (String property : properties) {
+                    // Split property by " " to get key value pairs
+                    String[] propertyParts = property.split(" ");
+                    // Get property name and value
+                    String propertyName = propertyParts[0];
+                    System.out.println("Property name: " + propertyName);
+                    double propertyValue = Double.parseDouble(propertyParts[1]);
+                    System.out.println("Property value: " + propertyValue);
+                    // Add property to map
+                    propertiesMap.put(propertyName, propertyValue);
+                    System.out.println("Added property: " + propertyName + "=" + propertyValue);
+                }
+                // Create shape
+                AbstractShape shape = switch (shapeType) { // Based on the shape type, instantiate a new shape accordingly
+                    case "Rectangle" -> new Rectangle();
+                    case "Square" -> new Square();
+                    case "Circle" -> new Circle();
+                    case "LineSegment" -> new LineSegment();
+                    default -> throw new IllegalStateException("Unexpected value: " + shapeType);
+                };
+                // Set properties
+                shape.setProperties(propertiesMap);
+                // Add shape to canvas
+                canvas.getGraphicsEngine().addShape(shape);
+            }
+            canvas.repaint();
             JOptionPane.showMessageDialog(null, "Shapes loaded successfully.");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error loading shapes: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
