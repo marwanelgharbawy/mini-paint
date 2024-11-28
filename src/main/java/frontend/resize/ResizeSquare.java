@@ -6,6 +6,8 @@ import backend.Validations;
 import frontend.PaintingPanel;
 import shapes.Square;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class ResizeSquare extends JFrame {
@@ -30,6 +32,13 @@ public class ResizeSquare extends JFrame {
             square.setProperties(Map.of("side", side));
             canvas.repaint();
             dispose();
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
     }
 }

@@ -1,4 +1,4 @@
-package frontend;
+package frontend.resize;
 
 import javax.swing.*;
 
@@ -6,6 +6,8 @@ import backend.Validations;
 import frontend.PaintingPanel;
 import shapes.LineSegment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class ModifyLine extends JFrame {
@@ -37,6 +39,13 @@ public class ModifyLine extends JFrame {
             line.setProperties(Map.of("startX", x1, "startY", y1, "endX", x2, "endY", y2));
             canvas.repaint();
             dispose();
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
     }
 }

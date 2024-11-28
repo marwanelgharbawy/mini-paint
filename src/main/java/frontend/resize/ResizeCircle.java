@@ -6,6 +6,8 @@ import backend.Validations;
 import frontend.PaintingPanel;
 import shapes.Circle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class ResizeCircle extends JFrame {
@@ -13,6 +15,7 @@ public class ResizeCircle extends JFrame {
     private JPanel contentPane;
     private JButton resizeButton;
     private JTextField radiusField;
+    private JButton backButton;
 
     public ResizeCircle(Circle circle, PaintingPanel canvas) {
         setContentPane(contentPane);
@@ -30,6 +33,13 @@ public class ResizeCircle extends JFrame {
             circle.setProperties(Map.of("radius", radius));
             canvas.repaint();
             dispose();
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
     }
 }

@@ -6,6 +6,8 @@ import backend.Validations;
 import frontend.PaintingPanel;
 import shapes.Rectangle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class ResizeRectangle extends JFrame{
@@ -33,6 +35,13 @@ public class ResizeRectangle extends JFrame{
             rectangle.setProperties(Map.of("width", width, "height", height));
             canvas.repaint();
             dispose();
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
     }
 }
